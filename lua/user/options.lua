@@ -1,7 +1,7 @@
 local options = {
   backup = false,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-  cmdheight = 2,                           -- more space in the neovim command line for displaying messages
+  cmdheight = 1,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   conceallevel = 0,                        -- so that `` is visible in markdown files
   fileencoding = "utf-8",                  -- the encoding written to a file
@@ -16,7 +16,6 @@ local options = {
   splitbelow = true,                       -- force all horizontal splits to go below current window
   splitright = true,                       -- force all vertical splits to go to the right of current window
   swapfile = false,                        -- creates a swapfile
-  termguicolors = true,                    -- set term gui colors (most terminals support this)
   timeoutlen = 1000,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true,                         -- enable persistent undo
   updatetime = 300,                        -- faster completion (4000ms default)
@@ -24,19 +23,36 @@ local options = {
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
   tabstop = 2,                             -- insert 2 spaces for a tab
-  cursorline = true,                       -- highlight the current line
   number = true,                           -- set numbered lines
   relativenumber = true,                  -- set relative numbered lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = true,                            -- display lines as one long line, or true to wrap within screen
   linebreak = true,                        -- companion to wrap, don't split words
-  scrolloff = 8,                           -- is one of my fav
+  scrolloff = 10,                           -- is one of my fav
   sidescrolloff = 8,
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  title = true,
+  autoindent = true,
+  showcmd = true,
+  shell = 'fish',
+  smarttab = true,
+  breakindent = true,
+  ai = true,
+  si = true,
+
+  -- Highlights
+  cursorline = true,                       -- highlight the current line
+  termguicolors = true,                    -- set term gui colors (most terminals support this)
+  winblend = 0,
+  wildoptions = 'pum',
+  pumblend = 5,
+  background = 'dark',
 }
 
 vim.opt.shortmess:append "c"
+vim.scriptencoding = 'utf-8'
+vim.opt.wildignore:append { "*/node_modules/*" }
 
 for k, v in pairs(options) do
   vim.opt[k] = v
