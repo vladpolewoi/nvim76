@@ -16,7 +16,16 @@ return {
           hide_gitignore = true,
         },
       },
+      event_handlers = {
+        -- Close file tree when file is opened
+        {
+          event = "file_opened",
+          handler = function()
+            vim.cmd("Neotree close")
+          end,
+        },
+      },
     })
-    vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal right <CR>")
+    vim.keymap.set("n", "<leader>e", ":Neotree toggle right <CR>")
   end,
 }
