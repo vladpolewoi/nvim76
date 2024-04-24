@@ -37,6 +37,9 @@ vim.opt.mouse = ""
 
 vim.opt.formatoptions:append({ "r" })
 
+-- exit terminal mode with <C-n>
+vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
+
 -- transparent background
 vim.api.nvim_command([[
   augroup ChangeBackgroundColour
