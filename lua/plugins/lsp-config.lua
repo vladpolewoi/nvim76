@@ -3,7 +3,7 @@ return {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
-    end
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -13,30 +13,58 @@ return {
           "lua_ls",
           "tsserver",
           "astro",
-        }
+          "rust_analyzer",
+        },
       })
-    end
+    end,
   },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
 
       lspconfig.lua_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.tsserver.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.astro.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+      })
+      lspconfig.rust_analyzer.setup({
+        settings = {
+          ["rust-analyzer"] = {
+            check = {
+              command = "clippy",
+            },
+            diagnostics = {
+              enable = true,
+            },
+          },
+        },
+        capabilities = capabilities,
       })
 
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
-    end
-  }
+      require("cmp").setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end,
+        },
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "vsnip" },
+          { name = "path" },
+          { name = "buffer" },
+        },
+      })
+
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+    end,
+  },
 }
