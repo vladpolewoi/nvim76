@@ -48,20 +48,6 @@ return {
         capabilities = capabilities,
       })
 
-      require("cmp").setup({
-        snippet = {
-          expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
-          end,
-        },
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "vsnip" },
-          { name = "path" },
-          { name = "buffer" },
-        },
-      })
-
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
